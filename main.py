@@ -281,7 +281,7 @@ def get_recent_closed_trades():
 def send_report(positions):
     if not settings['email_enabled']:
         return
-    content = "Daily report of open positions:\n\n"
+    content = "Report of open positions:\n\n"
     if not positions:
         content += "No open positions.\n"
     else:
@@ -302,7 +302,7 @@ def send_report(positions):
             content += f"{row[0]}: Amount={row[1]:.4f}, Buy={row[2]:.2f}, Sell={row[4]:.2f}, PNL={row[6]:.2f} USDT (Sold on {row[5]})\n"
         content += f"Total closed PNL: {total_closed_pnl:.2f} USDT\n"
     msg = MIMEText(content)
-    msg['Subject'] = 'KuCoin Trading Daily Report'
+    msg['Subject'] = 'KuCoin Trading Report'
     msg['From'] = SMTP_USER
     msg['To'] = TO_EMAIL
     try:
