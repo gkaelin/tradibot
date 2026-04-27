@@ -356,6 +356,7 @@ def analyze_and_trade(symbol, positions):
             buy_sig, sell_sig, _ = get_candlestick_signals(symbol, tf)
             if buy_sig: buy_count += 1
             if sell_sig: sell_count += 1
+            time.sleep(0.5)
 
         base_currency = symbol.split('/')[0]
         balance = exchange.fetch_balance()
@@ -398,7 +399,7 @@ def main():
         positions = load_positions()
         for symbol in usdt_pairs:
             analyze_and_trade(symbol, positions)
-            time.sleep(1)
+            
         if time.time() - last_report_time >= settings['report_interval']:
             send_report(load_positions())
             last_report_time = time.time()
